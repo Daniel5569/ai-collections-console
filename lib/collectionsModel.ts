@@ -1,14 +1,22 @@
-export const riskRank = {
+import type { Account, FilterState, Metrics, RiskLevel } from "./types";
+
+const riskRank: Record<RiskLevel, number> = {
   Low: 1,
   Medium: 2,
   High: 3,
   Critical: 4
 };
 
-export function filterAccounts(accounts, { filter = "All", search = "", sort = "risk" } = {}) {
+export function filterAccounts(
+  accounts: Account[],
+  { filter = "All", search = "", sort = "risk" }: Partial<FilterState> = {}
+): Account[] {
   const normalizedSearch = search.trim().toLowerCase();
   const visible = accounts.filter((account) => {
-    const matchesFilter = filter === "All" || account.status === filter || (filter === "Approved" && account.approvedAction);
+    const matchesFilter =
+      filter === "All" ||
+      account.status === filter ||
+      (filter === "Approved" && account.approvedAction);
     const matchesSearch =
       normalizedSearch.length === 0 ||
       [account.id, account.company, account.contact, account.owner, account.reason]
@@ -19,43 +27,33 @@ export function filterAccounts(accounts, { filter = "All", search = "", sort = "
   });
 
   return [...visible].sort((left, right) => {
-    if (sort === "balance") {
-      return right.balance - left.balance;
-    }
-    if (sort === "age") {
-      return right.daysPastDue - left.daysPastDue;
-    }
-    if (sort === "recovery") {
-      return right.recoveryScore - left.recoveryScore;
-    }
+    if (sort === "balance") return right.balance - left.balance;
+    if (sort === "age") return right.daysPastDue - left.daysPastDue;
+    if (sort === "recovery") return right.recoveryScore - left.recoveryScore;
     return riskRank[right.risk] - riskRank[left.risk] || right.balance - left.balance;
   });
 }
 
-export function calculateMetrics(accounts) {
+export function calculateMetrics(accounts: Account[]): Metrics {
   return {
-    totalBalance: accounts.reduce((sum, account) => sum + account.balance, 0),
-    expectedRecovery: accounts.reduce((sum, account) => sum + account.balance * account.recoveryLikelihood, 0),
-    reviewCount: accounts.filter((account) =>
-      ["Needs review", "Escalation hold", "Payment plan"].includes(account.status)
+    totalBalance: accounts.reduce((sum, a) => sum + a.balance, 0),
+    expectedRecovery: accounts.reduce((sum, a) => sum + a.balance * a.recoveryLikelihood, 0),
+    reviewCount: accounts.filter((a) =>
+      ["Needs review", "Escalation hold", "Payment plan"].includes(a.status)
     ).length,
-    highRiskCount: accounts.filter((account) => ["High", "Critical"].includes(account.risk)).length
+    highRiskCount: accounts.filter((a) => ["High", "Critical"].includes(a.risk)).length
   };
 }
 
-export function approveAccount(accounts, accountId) {
+export function approveAccount(accounts: Account[], accountId: string): Account[] {
   return accounts.map((account) =>
     account.id === accountId
-      ? {
-          ...account,
-          approvedAction: true,
-          status: "Approved"
-        }
+      ? { ...account, approvedAction: true, status: "Approved" as const }
       : account
   );
 }
 
-export function undoApproval(accounts, accountId) {
+export function undoApproval(accounts: Account[], accountId: string): Account[] {
   return accounts.map((account) =>
     account.id === accountId
       ? {
@@ -67,7 +65,7 @@ export function undoApproval(accounts, accountId) {
   );
 }
 
-export function seedAccountState(accounts) {
+export function seedAccountState(accounts: Account[]): Account[] {
   return accounts.map((account) => ({
     ...account,
     originalStatus: account.status,
@@ -76,13 +74,13 @@ export function seedAccountState(accounts) {
   }));
 }
 
-export function runDemoBatch(accounts) {
+export function runDemoBatch(accounts: Account[]): Account[] {
   return accounts.map((account) => {
     if (account.id === "AC-1140") {
       return {
         ...account,
         previousStatus: account.status,
-        status: "Ready to send",
+        status: "Ready to send" as const,
         recoveryScore: Math.min(100, account.recoveryScore + 4),
         recoveryLikelihood: Math.min(0.95, account.recoveryLikelihood + 0.04),
         reason: "Low-risk reminder auto-prepared"
@@ -92,7 +90,7 @@ export function runDemoBatch(accounts) {
       return {
         ...account,
         previousStatus: account.status,
-        status: "Needs review",
+        status: "Needs review" as const,
         recoveryScore: Math.max(0, account.recoveryScore - 6),
         recoveryLikelihood: Math.max(0.1, account.recoveryLikelihood - 0.06),
         reason: "Dispute requires evidence before call"
@@ -102,7 +100,7 @@ export function runDemoBatch(accounts) {
       return {
         ...account,
         previousStatus: account.status,
-        status: "Payment plan",
+        status: "Payment plan" as const,
         recoveryScore: Math.min(100, account.recoveryScore + 7),
         recoveryLikelihood: Math.min(0.95, account.recoveryLikelihood + 0.07),
         proposedPlan: "40% Friday, 30% in 14 days, 30% in 30 days"

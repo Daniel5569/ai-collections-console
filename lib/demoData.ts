@@ -1,4 +1,6 @@
-export const accounts = [
+import type { Account, AuditEntry } from "./types";
+
+export const accounts: Account[] = [
   {
     id: "AC-1027",
     company: "Northstar Components",
@@ -13,7 +15,8 @@ export const accounts = [
     proposedPlan: "50% now, 50% in 14 days",
     reason: "No payment owner confirmed",
     suggestedAction: "Ask for payment owner, attach statement, offer 2-step payment plan",
-    draft: "Hi Northstar team, I am following up on invoice INV-1027 for $18,420, now 47 days past due. Could you confirm the right AP owner and whether a two-step payment plan would help close this this week?",
+    draft:
+      "Hi Northstar team, I am following up on invoice INV-1027 for $18,420, now 47 days past due. Could you confirm the right AP owner and whether a two-step payment plan would help close this this week?",
     nextStep: "Human approve first reminder",
     owner: "AI agent 04"
   },
@@ -31,7 +34,8 @@ export const accounts = [
     proposedPlan: "Dispute-first call, no plan until evidence is logged",
     reason: "Dispute mentioned in last email",
     suggestedAction: "Call first, confirm dispute category, do not escalate until evidence is logged",
-    draft: "Call opener: I am calling about invoice INV-1088. I see there may be a dispute, so I want to understand the exact reason before anyone escalates this further.",
+    draft:
+      "Call opener: I am calling about invoice INV-1088. I see there may be a dispute, so I want to understand the exact reason before anyone escalates this further.",
     nextStep: "Approve call script",
     owner: "AI agent 11"
   },
@@ -49,7 +53,8 @@ export const accounts = [
     proposedPlan: "One-click payment link, no split needed",
     reason: "Likely missed approval",
     suggestedAction: "Send friendly reminder with payment link and statement",
-    draft: "Hi BrightOps team, quick reminder on invoice INV-1140 for $7,600. Here is the statement and payment link. If anything is blocking approval, reply here and I will route it to the right team.",
+    draft:
+      "Hi BrightOps team, quick reminder on invoice INV-1140 for $7,600. Here is the statement and payment link. If anything is blocking approval, reply here and I will route it to the right team.",
     nextStep: "Auto-send eligible",
     owner: "AI agent 02"
   },
@@ -67,7 +72,8 @@ export const accounts = [
     proposedPlan: "Human finance approval before attorney packet",
     reason: "Large balance, no response, regulated customer",
     suggestedAction: "Prepare attorney packet, but require finance approval before any demand letter",
-    draft: "Escalation note: account has no verified response across email and phone. Evidence packet includes invoice, statement, contact attempts and customer notes. Human finance approval required.",
+    draft:
+      "Escalation note: account has no verified response across email and phone. Evidence packet includes invoice, statement, contact attempts and customer notes. Human finance approval required.",
     nextStep: "Finance approval",
     owner: "AI agent 19"
   },
@@ -85,7 +91,8 @@ export const accounts = [
     proposedPlan: "40% this week, 60% within 30 days",
     reason: "Customer requested split payment",
     suggestedAction: "Offer documented 40/60 split, ask for first payment date",
-    draft: "Thanks for the update. We can propose a 40/60 split if the first payment is scheduled this week. Please confirm the first date and preferred payment method.",
+    draft:
+      "Thanks for the update. We can propose a 40/60 split if the first payment is scheduled this week. Please confirm the first date and preferred payment method.",
     nextStep: "Approve payment plan",
     owner: "AI agent 07"
   },
@@ -103,13 +110,14 @@ export const accounts = [
     proposedPlan: "Friendly reminder with payment link",
     reason: "First reminder only",
     suggestedAction: "Send under customer brand, keep tone friendly",
-    draft: "Hi Harborline team, just resurfacing invoice INV-1250 for $5,400. If payment has already been scheduled, thank you; otherwise the payment link is below.",
+    draft:
+      "Hi Harborline team, just resurfacing invoice INV-1250 for $5,400. If payment has already been scheduled, thank you; otherwise the payment link is below.",
     nextStep: "Approve reminder",
     owner: "AI agent 01"
   }
 ];
 
-export const initialAuditLog = [
+export const initialAuditLog: AuditEntry[] = [
   {
     time: "09:12",
     account: "AC-1088",
@@ -133,7 +141,7 @@ export const initialAuditLog = [
   }
 ];
 
-export const guardrails = [
+export const guardrails: string[] = [
   "No legal escalation without human approval",
   "Disputes must be categorized before follow-up",
   "Tone stays respectful and under customer brand",

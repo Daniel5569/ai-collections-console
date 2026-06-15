@@ -1,5 +1,10 @@
 # AI Collections & Back-office Automation Console
 
+[![CI](https://github.com/Daniel5569/ai-collections-console/actions/workflows/ci.yml/badge.svg)](https://github.com/Daniel5569/ai-collections-console/actions/workflows/ci.yml)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?logo=typescript&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)
+
 Local demo for a founder/CTO conversation around AI-powered B2B collections workflows.
 
 This is not affiliated with AgentCollect. It is a portfolio demo built around the kind of workflow an AI collections company needs: overdue account queue, AI-drafted next actions, reason codes, human approval and audit logs.
@@ -29,6 +34,15 @@ AI collections products do not only need model calls. They need operational cont
 
 That matches the kind of internal tool, workflow automation and AI product execution useful for founder-led startups.
 
+## Tech Stack
+
+- **Next.js 15** with App Router and TypeScript 5.7
+- **React 19** — client components, `useState`, `useMemo`, `useEffect`
+- **REST API** — `GET /api/accounts`, `GET /api/accounts/:id`
+- **Lucide React** for icons (minimal dependency footprint)
+- Pure CSS design system with custom properties (no Tailwind)
+- Node.js native test runner with `tsx` for TypeScript tests
+
 ## Run Locally
 
 ```bash
@@ -48,7 +62,21 @@ Quality checks:
 npm run check
 ```
 
-The check command runs lint, model tests, production build and dependency audit.
+The check command runs lint, type check, unit tests, production build and dependency audit.
+
+## Docker
+
+```bash
+docker build -t ai-collections-console .
+docker run -p 3000:3000 ai-collections-console
+```
+
+## API
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/api/accounts` | All overdue accounts |
+| `GET` | `/api/accounts/:id` | Single account by ID |
 
 ## Demo Script
 
@@ -65,21 +93,22 @@ The check command runs lint, model tests, production build and dependency audit.
 ## Local Artifacts
 
 - `Founder_Demo_Brief_AgentCollect_2026-06-11.docx` is an intentional founder demo brief; see `docs/README.md`.
-- `screenshots/` should keep only final desktop/mobile evidence captures.
+- `screenshots/` keeps final desktop/mobile evidence captures.
 
 ## Deliberate Limits
 
 - Fake customer data only
-- No real AI API call
+- No real AI API call (see `.env.example` for plugging in a live LLM)
 - No collection/legal advice
 - No production claim
 - No sensitive data
 
 ## Next Improvements
 
+- Add Supabase/PostgreSQL schema and real persistence
+- Add role-based review states and auth (NextAuth)
 - Add CSV import for overdue accounts
-- Add Supabase/PostgreSQL schema
-- Add role-based review states
 - Add payment-plan calculator
 - Add exportable audit log
 - Add source-of-truth sync with CRM/accounting tools
+- Wire in a real LLM API for live AI recommendations

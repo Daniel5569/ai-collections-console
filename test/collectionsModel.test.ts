@@ -7,9 +7,10 @@ import {
   runDemoBatch,
   seedAccountState,
   undoApproval
-} from "../lib/collectionsModel.mjs";
+} from "../lib/collectionsModel.ts";
+import type { Account } from "../lib/types.ts";
 
-const accounts = seedAccountState([
+const accounts: Account[] = seedAccountState([
   {
     id: "AC-1",
     company: "Apex",
@@ -21,7 +22,6 @@ const accounts = seedAccountState([
     recoveryScore: 80,
     recoveryLikelihood: 0.8,
     reason: "First reminder",
-    proposedPlan: "Pay now",
     owner: "AI agent"
   },
   {
@@ -35,7 +35,6 @@ const accounts = seedAccountState([
     recoveryScore: 58,
     recoveryLikelihood: 0.47,
     reason: "Dispute mentioned",
-    proposedPlan: "Call first",
     owner: "AI agent"
   },
   {
@@ -49,7 +48,6 @@ const accounts = seedAccountState([
     recoveryScore: 69,
     recoveryLikelihood: 0.61,
     reason: "Split requested",
-    proposedPlan: "40/60",
     owner: "AI agent"
   }
 ]);
@@ -70,11 +68,11 @@ test("sorts by risk before balance by default", () => {
 test("approval and undo update the account state", () => {
   const approved = approveAccount(accounts, "AC-1");
 
-  assert.equal(approved.find((account) => account.id === "AC-1").status, "Approved");
+  assert.equal(approved.find((a) => a.id === "AC-1")?.status, "Approved");
   assert.equal(filterAccounts(approved, { filter: "Approved" }).length, 1);
 
   const undone = undoApproval(approved, "AC-1");
-  assert.equal(undone.find((account) => account.id === "AC-1").status, "Ready to send");
+  assert.equal(undone.find((a) => a.id === "AC-1")?.status, "Ready to send");
 });
 
 test("demo batch changes routing and metrics", () => {
@@ -82,6 +80,6 @@ test("demo batch changes routing and metrics", () => {
   const afterAccounts = runDemoBatch(accounts);
   const after = calculateMetrics(afterAccounts);
 
-  assert.equal(afterAccounts.find((account) => account.id === "AC-1088").status, "Needs review");
+  assert.equal(afterAccounts.find((a) => a.id === "AC-1088")?.status, "Needs review");
   assert.notEqual(after.expectedRecovery, before.expectedRecovery);
 });
