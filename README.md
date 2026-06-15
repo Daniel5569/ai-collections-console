@@ -5,14 +5,14 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)
 
-Local demo for a founder/CTO conversation around AI-powered B2B collections workflows.
+Local demo for a founder/CTO conversation around human-reviewed AI workflow design for B2B collections.
 
 This is not affiliated with AgentCollect. It is a portfolio demo built around the kind of workflow an AI collections company needs: overdue account queue, AI-drafted next actions, reason codes, human approval and audit logs.
 
 ## What It Shows
 
 - Overdue B2B accounts with balances, risk levels and days past due
-- AI-suggested next action for each account
+- AI-style suggested next action for each account
 - Forecast recovery estimate and recovery score per account
 - Draft email/call/payment-plan text
 - Suggested payment path for human review
@@ -72,6 +72,8 @@ docker run -p 3000:3000 ai-collections-console
 ```
 
 ## API
+
+The API routes serve deterministic demo data so reviewers can inspect the full-stack shape without requiring external services.
 
 | Method | Route | Description |
 |--------|-------|-------------|
