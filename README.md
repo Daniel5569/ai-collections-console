@@ -5,7 +5,8 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)
 
-Local demo for a founder/CTO conversation around human-reviewed AI workflow design for B2B collections.
+![AI Collections Console — overdue account queue, AI recommendations, and approval workflow](screenshots/agentcollect-console-desktop-final.png)
+
 
 This is not affiliated with AgentCollect. It is a portfolio demo built around the kind of workflow an AI collections company needs: overdue account queue, AI-drafted next actions, reason codes, human approval and audit logs.
 
