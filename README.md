@@ -94,10 +94,6 @@ The API routes serve deterministic demo data so reviewers can inspect the full-s
 8. Use search/sort to find a high-risk or large-balance account.
 9. Explain that the useful part is not the fake AI text, but the human-reviewed workflow around it.
 
-## Local Artifacts
-
-- `Founder_Demo_Brief_AgentCollect_2026-06-11.docx` is an intentional founder demo brief; see `docs/README.md`.
-- `screenshots/` keeps final desktop/mobile evidence captures.
 
 ## Deliberate Limits
 
@@ -116,3 +112,4 @@ The API routes serve deterministic demo data so reviewers can inspect the full-s
 - Add exportable audit log
 - Add source-of-truth sync with CRM/accounting tools
 - Wire in a real LLM API for live AI recommendations
+
