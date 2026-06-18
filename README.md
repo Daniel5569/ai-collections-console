@@ -7,8 +7,9 @@
 
 ![AI Collections Console — overdue account queue, AI recommendations, and approval workflow](screenshots/agentcollect-console-desktop-final.png)
 
+A portfolio demo of the workflow infrastructure an AI-native collections product needs: human-reviewed approval gates, risk-scored account queue, AI-drafted next actions, reason codes, and a full audit trail. Built to demonstrate what distinguishes real collections automation from a simple AI wrapper.
 
-This is not affiliated with AgentCollect. It is a portfolio demo built around the kind of workflow an AI collections company needs: overdue account queue, AI-drafted next actions, reason codes, human approval and audit logs.
+**Core differentiator:** The AI proposes — a human approves before any escalation, communication, or payment plan is initiated. No action reaches a customer without a reviewer decision in the audit log.
 
 ## What It Shows
 
