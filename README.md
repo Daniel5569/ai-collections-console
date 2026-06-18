@@ -5,7 +5,6 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)
 
-![AI Collections Console — overdue account queue, AI recommendations, and approval workflow](screenshots/agentcollect-console-desktop-final.png)
 
 A portfolio demo of the workflow infrastructure an AI-native collections product needs: human-reviewed approval gates, risk-scored account queue, AI-drafted next actions, reason codes, and a full audit trail. Built to demonstrate what distinguishes real collections automation from a simple AI wrapper.
 
