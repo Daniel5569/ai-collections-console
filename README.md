@@ -1,6 +1,9 @@
 # AI Collections & Back-office Automation Console
 
 [![CI](https://github.com/Daniel5569/ai-collections-console/actions/workflows/ci.yml/badge.svg)](https://github.com/Daniel5569/ai-collections-console/actions/workflows/ci.yml)
+
+![Screenshot](docs/screenshot.png)
+
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-22c55e)
